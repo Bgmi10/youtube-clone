@@ -102,6 +102,11 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
      -onclick of the vid it take me to new page (it have the specific vid , comment section , recommend vid)
      
 
-
+# Header
+# Body 
+# sidebar 
+  - menu items
+# main container
+  - cards
 
 
