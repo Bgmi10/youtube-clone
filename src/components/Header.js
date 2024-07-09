@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faBars,faSearchPlus, faClose } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faBars,faSearchPlus, faClose, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { Sidebar } from './Sidebar';
 import {useDispatch} from 'react-redux'
 import { toggelmenu } from '../utils/menuslice';
+import { SearchBar } from './SearchBar';
 
 export const Header = () => {
 
   const [isopen , setisopen] = useState(false)
+  const [query , setQuery] = useState('')
   const dispatch = useDispatch()
+  const [focus , setFocus]  = useState(false)
+  
 
   const hamburgerclick = () =>{
     setisopen(!isopen)
@@ -16,6 +20,7 @@ export const Header = () => {
     
   }
   return (
+    <>
     <div className='flex justify-between items-center shadow-md py-2 px-4 md:px-6 lg:px-8'>
      
      <div className='flex items-center space-x-4'>
@@ -44,11 +49,21 @@ export const Header = () => {
         <input
           type='text'
           placeholder='Search'
-          className='w-full max-w-xs sm:max-w-sm lg:max-w-md px-2 py-1 border rounded'
+          className='w-full max-w-xs sm:max-w-sm lg:max-w-md px-2 py-1 border rounded-md'
+          onChange={e => setQuery(e.target.value)}
+          onFocus={()=> setFocus(true)}
+
+          onBlur={() => setFocus(false)}
         />
-        <FontAwesomeIcon icon={faSearchPlus}  className='mt-2 ml-2  rounded text-lg cursor-pointer text-gray-400'/>
+        <FontAwesomeIcon icon={faSearch}  className='mt-2 ml-2   rounded text-lg cursor-pointer text-gray-400'/>
+        <div className=' mt-10  '>
+
+            <SearchBar query={query} focus={focus}/>
+
+         </div> 
         
-      </div>
+      </div> 
+      
 
       
       <div className='flex items-center space-x-4'>
@@ -57,6 +72,10 @@ export const Header = () => {
           className='text-xl md:text-2xl mt-1 ml-2'
         />
       </div>
+     
     </div>
+   
+    </>
   );
 };
+

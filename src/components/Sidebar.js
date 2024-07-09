@@ -13,7 +13,7 @@ export const Sidebar = () => {
 
   if(!ismenuopen) return null
   return (
-    <div className='p-5 shadow-md w-40  h-[600px] ml-1 m-2  text-lg '>
+    <div className='p-5 shadow-md w-40  h-[600px] ml-1 m-2  text-lg absolute bg-white rounded-md '>
        <div className=' border-b-2'>
       <ul >
       <li >
