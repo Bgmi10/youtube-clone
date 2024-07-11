@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { youtube_api } from '../utils/constants'
+import {Link, useParams} from 'react-router-dom'
 
 
 
 export const Maincontainer = () => {
 
   const [data , setData] = useState(null)
+  console.log(data)
 
+   
 
   useEffect(()=>{
     const fetchdata = async () =>{
@@ -15,7 +18,6 @@ export const Maincontainer = () => {
       const json = await res.json()
       setData(json)
 
-      
 
     }
 
@@ -32,14 +34,16 @@ export const Maincontainer = () => {
      <div className=' flex  flex-wrap   p-2 mt-10  lg:ml-14 sm: mr-2 ' >
          {
             data?.items?.map((i)=>(
-              <div key={i.id} className=' '>
+               <Link key={i.id} to={`/detailpage/${i.id}`}>
+              <div >
 
                  <img src= {i.snippet.thumbnails.maxres?.url}  className='rounded-lg m-2   w-[381px] h-[237px] hover:scale-95 cursor-pointer transition-transform'/>
-                 {/* <div className="bg-white p-8 rounded-md text-black text-center max-w-screen-md w-full customBreakWords">
-                    <span className=' break-words whitespace-normal'> {i.snippet.title}</span> 
-                 </div> */}
+                 <div className="bg-white p-8 rounded-md text-black text-center max-w-screen-md w-full ">
+                  {i.snippet.title}
+                 </div>
                
                 </div>
+                </Link> 
             ))
          }
      </div>

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faBars,faSearchPlus, faClose, faSearch } from '@fortawesome/free-solid-svg-icons';
-import { Sidebar } from './Sidebar';
+import { faUser, faBars, faClose, faSearch } from '@fortawesome/free-solid-svg-icons';
 import {useDispatch} from 'react-redux'
 import { toggelmenu } from '../utils/menuslice';
 import { SearchBar } from './SearchBar';
