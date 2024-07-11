@@ -4,7 +4,7 @@ import { api_key } from '../utils/constants'
 import { Embedvideo } from './Embedvideo'
 import {Livechat} from './Livechat'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faBars, faClose, faSearch, faArrowDown, faAngleDown } from '@fortawesome/free-solid-svg-icons'
+import {  faAngleDown } from '@fortawesome/free-solid-svg-icons'
 
 export const Detailpage = () => {
 
@@ -24,7 +24,7 @@ export const Detailpage = () => {
     }
     
     useEffect(() =>{
-          
+          fetch_data()
     },[])
 
    
