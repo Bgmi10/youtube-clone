@@ -7,6 +7,10 @@ const commentslice = createSlice({
         comments : (state , action) =>{
             const a = [...state , action.payload]
             return a 
+        },
+
+        removecommets : (state) => {
+              state.splice( )
         }
     }
 })
@@ -14,4 +18,4 @@ const commentslice = createSlice({
 
 export default commentslice.reducer
 
-export const {comments} = commentslice.actions
+export const {comments , removecommets} = commentslice.actions

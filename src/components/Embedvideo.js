@@ -1,6 +1,7 @@
 import React from 'react'
+import { Commentsection } from './Commentsection';
 
-export const Embedvideo = ({videoid , data}) => {
+export const Embedvideo = ({videoid , data , classname}) => {
 
     function formatViews(number) {
         if (number >= 1e9) {
@@ -13,22 +14,28 @@ export const Embedvideo = ({videoid , data}) => {
       }
 
   return (
-    <div>
+    <>
+    <div className='flex flex-col'>
          <iframe
         id="youtube-video"
-        src={`https://www.youtube.com/embed/${videoid}`}
-        
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowFullScreen
+        src={`https://www.youtube.com/embed/${videoid}?autoplay=1&mute=true`}
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture "
+       
         title="YouTube video player"
-        className='lg:ml-20 lg:mt-4 rounded-md lg:w-[640px] lg:h-[360px] sm: w-[400px] sm: ml-2 sm: h-[230px] sm: mt-[30px]'
+        className={classname}
       ></iframe>
        <div>
               <p className='sm: m-3 font-normal text-2xl lg:ml-20 mt-2'>{data?.items?.[0].snippet.title}</p>
 
               <p className='text-gray-300 sm: ml-10'>{formatViews(data?.items?.[0].statistics.viewCount)}</p>
           </div>
+         
     </div>
+   
+    </>
   )
 }
 
+
+
+// 

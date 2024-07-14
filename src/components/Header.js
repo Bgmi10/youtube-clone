@@ -48,13 +48,13 @@ export const Header = () => {
         <input
           type='text'
           placeholder='Search'
-          className='w-full max-w-xs sm:max-w-sm lg:max-w-md px-2 py-1 border rounded-md'
+          className='w-full max-w-xs sm:max-w-sm lg:max-w-md px-2 py-1 border rounded-md '
           onChange={e => setQuery(e.target.value)}
           onFocus={()=> setFocus(true)}
 
           onBlur={() => setFocus(false)}
         />
-        <FontAwesomeIcon icon={faSearch}  className='mt-2 ml-2   rounded text-lg cursor-pointer text-gray-400'/>
+        <FontAwesomeIcon icon={faSearch}  className='mt-2  ml-2  rounded text-lg cursor-pointer text-gray-400 '/> 
         <div className=' mt-10  '>
 
             <SearchBar query={query} focus={focus}/>

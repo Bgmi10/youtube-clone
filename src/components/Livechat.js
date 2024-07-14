@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {  faAngleDown, faClose } from '@fortawesome/free-solid-svg-icons'
-import { comments } from '../utils/commentslice';
+import {  faAngleDown, faArrowRight, faClose, faMessage, faTriangleExclamation } from '@fortawesome/free-solid-svg-icons'
+import { comments, removecommets } from '../utils/commentslice';
 import {useDispatch , useSelector} from 'react-redux'
 
 export const Livechat = ({showchat}) => {
@@ -9,6 +9,9 @@ export const Livechat = ({showchat}) => {
 
  const commentsdata = useSelector(store => store.livechat) 
  console.log(commentsdata)
+
+ const [msg , setMsg] = useState('')
+ 
 
  function randomId () {
   return Math.floor(Math.random( ) * 1000)
@@ -49,15 +52,33 @@ export const Livechat = ({showchat}) => {
           userprofile : randomuserprofile()
         }
             dispatch(comments(chatdata))
+    
+            
        },2000);
+       dispatch(removecommets())
+
 
        return () => clearInterval(i)
-  },[])
+  },[randomId])
+
+const  handlebtnclick = () =>{
+  const localuserdata = { 
+        id : randomId(),
+        username : randomusername(),
+        comment : msg,
+        userprofile : randomuserprofile()
+
+  }
+  dispatch(comments(localuserdata))
+
+  setMsg('')
+
+}
   return (
   <>
-    <div className='h-[360px] m-2 lg:ml-10 border mt-4 w-[380px] rounded-md transition-transform ease-in-out  overflow-y-scroll relative flex-col-reverse flex' >
+    <div className='h-[360px] m-2 lg:ml-10 border mt-4 w-[380px] rounded-md transition-transform ease-in-out  overflow-y-scroll  flex-col-reverse flex  '  >
   
-        <div className='flex shadow-md rounded-md justify-between fixed bg-white w-[378px] bottom-[410px]'>
+        <div className='flex shadow-md rounded-md justify-between absolute bg-white w-[378px] bottom-[410px]'>
              <p className='font-sans p-2 m-2 text-md '>Top chat <FontAwesomeIcon icon={faAngleDown}  className='text-gray-500   text-xl '/></p>
              <FontAwesomeIcon icon={faClose}  className='mt-4 text-gray-500 font-extralight cursor-pointer text-2xl mr-3' onClick={()=>showchat(false)}/>
 
@@ -65,9 +86,11 @@ export const Livechat = ({showchat}) => {
         </div>
         <div >
               {
-                commentsdata.map((i) =>(
+                
 
-                  <div key={i.id} className='flex   '>
+                commentsdata.map((i , index) =>(
+
+                  <div key={index} className='flex   '>
                         <img src={i.userprofile} className='rounded-full  m-1 p-1 h-10 w-10 '/>
                          <p className='text-gray-500 m-1 p-1'>{i.username}</p>
                          <p className='p-1 m-1  font-normal '>{i.comment}</p>
@@ -78,7 +101,10 @@ export const Livechat = ({showchat}) => {
                 ))
               }
         </div>
-        <input className='p-2 border'/>
+        <div className='absolute'>
+       <input className='p-2 outline-none w-[340px] bg-gray-200 m-2 rounded-md' placeholder='send message ' onChange={e => setMsg(e.target.value)} value={msg}/>
+        <FontAwesomeIcon icon={faArrowRight}  className='ml-[-30px] cursor-pointer ' onClick={handlebtnclick}/>
+        </div>
     </div>
   
   </>
